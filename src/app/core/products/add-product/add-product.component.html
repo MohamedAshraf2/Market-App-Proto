@@ -1,0 +1,109 @@
+<div class=" container">
+  <form class="add-product" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="add-product__images slider">
+      <div class="add-product__image-actions">
+        <div class="add-product__image-action">
+          <a href="#"><i class="fas fa-plus-square"></i></a>
+          <a href="#"><i class="fas fa-edit"></i></a>
+          <a href="#"><i class="fas fa-trash-alt"></i></a>
+        </div>
+      </div>
+      <div class="slider__items">
+        <div class="slider__item active" style="background-image: url(assets/img/avatars/avatar.jpg)"></div>
+        <div class="slider__item" style="background-image: url(assets/img/avatars/avatar.jpg)"></div>
+        <div class="slider__item" style="background-image: url(assets/img/avatars/avatar.jpg)"></div>
+      </div>
+      <div class="slider__indicators">
+        <span class="slider__indicator active"></span>
+        <span class="slider__indicator"></span>
+        <span class="slider__indicator"></span>
+      </div>
+    </div>
+    <div class="add-product__data">
+      <div class="form-controls">
+        <section class="tabs">
+          <div class="tabs__headers">
+            <div class="tabs__header active">
+              English
+            </div>
+            <div class="tabs__header">
+              Arabic
+            </div>
+          </div>
+          <div class="tabs__bodies">
+            <div class="tabs__body active">
+              <div class="form-group ">
+                <label for="">Name</label>
+                <input class="form-control" type="text" [(ngModel)]="product.data[0].name" name="nameInputField" id="">
+              </div>
+              <div class="form-group">
+                <label for="">Description</label>
+                <textarea class="form-control" name="descInputField" [(ngModel)]="product.data[0].description" id="" cols="30" rows="4"></textarea>
+              </div>
+            </div>
+            <div class="tabs__body ">
+              <div class="form-group invalid">
+                <label for="">Name</label>
+                <input class="form-control" type="text"  name="" id="">
+              </div>
+              <div class="form-group">
+                <label for="">Description</label>
+                <textarea class="form-control" name="" id="" cols="30" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="form-group">
+          <label for="">Price</label>
+          <input class="form-control" type="text" [(ngModel)]="product.price" name="price" id="">
+        </div>
+        <div class="add-product__discount">
+          <div class="form-group">
+            <label for="">Satus</label>
+            <div class="form-group__radios">
+              <div class="form-group__radio"><input type="radio" name="" id=""><span>On Sale</span></div>
+              <div class="form-group__radio"><input type="radio" name="" id=""><span>Not On Sale</span></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Discount</label>
+            <input class="form-control" type="text" [(ngModel)]="product.discount" name="discount" id="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Payment Types</label>
+          <div class="form-group__checkboxs">
+            <div class="form-group__checkbox" *ngFor="let pt of payment ; let i = index"><input type="checkbox" ngModel
+                [name]="'check_'+i" id=""><span>{{pt.name}}</span></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Category</label>
+          <select class="form-control" [(ngModel)]="product.categoryId" name="category" id="">
+            <option *ngFor="let cat of category" [value]="cat._id">{{cat.name}}</option>
+          </select>
+        </div>
+
+        <div class="taged-textbox form-group">
+          <label class="taged-textbox__lable" for="">Tags</label>
+          <div class="taged-textbox__data">
+            <div class="taged-textbox__tags">
+              <div class="taged-textbox__tag" *ngFor="let tag of product.tags "><span>{{tag.name}}</span><a href="#" class="taged-textbox__remove"><i
+                    class="fas fa-times"></i></a></div>
+
+            <div class="taged-textbox__clear">
+              <a href="#"><i class="fas fa-times"></i></a>
+            </div>
+          </div>
+          <input class="taged-textbox__textbox form-control" type="text" #tagInput ngModel (change)="onTag(tagInput)" name="tag" id="">
+        </div>
+        <div class="add-product__actions">
+          <button href="#" class="btn btn--gray">Cancel</button>
+          <button type="submit" class="btn btn--primary">{{isEditMode ? 'Edit' : 'Add'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
